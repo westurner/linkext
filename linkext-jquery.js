@@ -33,6 +33,8 @@
             $(document).click(function(event) {
                 // var text = $(event.target).text();
                 // var clickedElem = $(event.target);
+                console.log($(event.target));
+                console.log($(event.target).attr('id'));
                 closestElemWithId = $(event.target).closest('[id]');
                 // alert(closestElemWithId);
                 closestElemId = closestElemWithId.attr('id');
