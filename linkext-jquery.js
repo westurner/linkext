@@ -30,9 +30,10 @@
         if (origNode.id !== "") {
             return origNode;
         }
-        nodes = [];
-        i = 0;
-        for (node in document.all) {
+        var nodes = [];
+        var allNodes = document.all;
+        for (var i=0; i < allNodes.length; i++) {
+            node = allNodes[i];
             console.log(i + ' ' + node);
             if (node.id !== "") {
                 console.log(node.id);
@@ -40,9 +41,8 @@
             };
             if (node == origNode) {
                 //return false
-                break
+                break;
             }
-            ++i;
         }
         var closestIdNode = nodes[nodes.length - 1];
         return closestIdNode;
