@@ -26,20 +26,43 @@
 		initMyBookmarklet();
 	}
 
-    function findClosestIdElement(origElem) {
-        /* http://stackoverflow.com/a/23937118/188833 */
-        var origElemId = $(origElem).attr('id');
-        if (origElemId !== undefined) {
-            return origElemId;
+    function findClosestIdAttrNode_brute(origNode) {
+        if (origNode.id !== "") {
+            return origNode;
         }
-        var nearestElem = (
-            $(origElem).parents().addBack()
-            .prevAll().addBack()
-            .add($(origElem).parent())
-            .filter('[id]')
-            .reverse()
-            .first());
-        return nearestElem;
+        nodes = [];
+        i = 0;
+        for (node in document.all) {
+            console.log(i + ' ' + node);
+            if (node.id !== "") {
+                console.log(node.id);
+                nodes.push(node);
+            };
+            if (node == origNode) {
+                //return false
+                break
+            }
+            ++i;
+        }
+        var closestIdNode = nodes[nodes.length - 1];
+        return closestIdNode;
+    }
+
+    function findClosestIdAttrNode_sfd(origNode) {
+        var closestIdNode = null;
+        function walkDOM_reverse(node) {
+            do {
+                if (node.hasChildNodes()) {
+                    walkDOM(node.lastChild())
+                }
+                console.log(node);
+                if (node.id !== "") {
+                    closestIdNode = node;
+                    break;
+                }
+            } while ((closestIdNode === null) && (node = node.previousSibling))
+        }
+        return closestIdNode;
     }
 
 	function initMyBookmarklet() {
