@@ -29,9 +29,12 @@
     function findClosestIdElement(origElem) {
         /* http://stackoverflow.com/a/23937118/188833 */
         var elementsBeforeForm = $(origElem).parents().addBack().prevAll();
-        var elem = [].reverse(
-            elementsBeforeForm.find('[id]').add(elementsBeforeForm)
-        ).filter('[id]').first();
+        var elem = (elementsBeforeForm
+            .find('[id]')
+            .add(elementsBeforeForm)
+            .reverse()
+            .filter('[id]')
+            .first());
         return elem;
     }
 
