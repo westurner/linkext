@@ -62,6 +62,7 @@
                 }
             } while ((closestIdNode === null) && (node = node.previousSibling))
         }
+        walkDOM_reverse(origNode);
         return closestIdNode;
     }
 
