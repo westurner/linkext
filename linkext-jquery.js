@@ -34,9 +34,7 @@
         var allNodes = document.all;
         for (var i=0; i < allNodes.length; i++) {
             node = allNodes[i];
-            console.log(i + ' ' + node);
             if (node.id !== "") {
-                console.log(node.id);
                 nodes.push(node);
             };
             if (node == origNode) {
@@ -49,6 +47,7 @@
     }
 
     function findClosestIdAttrNode_sfd(origNode) {
+        /* TODO */
         var closestIdNode = null;
         function walkDOM_reverse(node) {
             do {
