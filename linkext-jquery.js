@@ -27,6 +27,7 @@
 	}
 	
 	function initMyBookmarklet() {
+        console.log('initMyBookmarklet');
 		(window.myBookmarklet = function() {
             // your JavaScript code goes here!
             $(document).click(function(event) {
