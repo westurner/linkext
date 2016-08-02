@@ -25,7 +25,14 @@
 	} else {
 		initMyBookmarklet();
 	}
-	
+
+    function findClosestIdElement(origElem) {
+        /* http://stackoverflow.com/a/23937118/188833 */
+        var elementsBeforeForm = $(origElem).parents().andSelf().prevAll();
+        var elem = elementsBeforeForm.find('[id]').add(elementsBeforeForm).last();
+        return elem
+    }
+
 	function initMyBookmarklet() {
         console.log('initMyBookmarklet');
 		(window.myBookmarklet = function() {
