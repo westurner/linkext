@@ -29,12 +29,14 @@
     function findClosestIdElement(origElem) {
         /* http://stackoverflow.com/a/23937118/188833 */
         var elementsBeforeForm = $(origElem).parents().addBack().prevAll();
-        var elem = elementsBeforeForm.find('[id]').add(elementsBeforeForm).reverse().filter('[id]').first();
+        var elem = [].reverse(
+            elementsBeforeForm.find('[id]').add(elementsBeforeForm)
+        ).filter('[id]').first();
         return elem;
     }
 
 	function initMyBookmarklet() {
-        window.jQuery.fn.reverse = Array.prototype.reverse;
+        window.jQuery.fn.extend({reverse: Array.prototype.reverse});
 
         console.log('initMyBookmarklet');
 		(window.myBookmarklet = function() {
