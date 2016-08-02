@@ -33,15 +33,16 @@
             $(document).click(function(event) {
                 // var text = $(event.target).text();
                 // var clickedElem = $(event.target);
+                console.log('event.target')
                 console.log($(event.target));
+                console.log('event.target.id');
                 console.log($(event.target).attr('id'));
-                closestElemWithId = $(event.target).closest('[id]');
-                // alert(closestElemWithId);
-                closestElemId = closestElemWithId.attr('id');
+                var closestElemWithId = findClosestIdElement($(event.target));
                 console.log(closestElemWithId);
+                var closestElemId = closestElemWithId.attr('id');
                 console.log(closestElemId);
                 document.location.hash = closestElemId;
-                closestElemUrl = document.location;
+                var closestElemUrl = document.location.toString();
                 console.log(closestElemUrl);
             });
 		})();
