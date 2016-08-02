@@ -7,24 +7,24 @@
     * - http://www.codetoad.com/javascript_get_selected_text.html
     */
 
-	// the minimum version of jQuery we want
-	var v = "3.1.0";
+    // the minimum version of jQuery we want
+    var v = "3.1.0";
 
-	// check prior inclusion and version
-	if (window.jQuery === undefined || window.jQuery.fn.jquery < v) {
-		var done = false;
-		var script = document.createElement("script");
-		script.src = "https://ajax.googleapis.com/ajax/libs/jquery/" + v + "/jquery.min.js";
-		script.onload = script.onreadystatechange = function(){
-			if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
-				done = true;
-				initMyBookmarklet();
-			}
-		};
-		document.getElementsByTagName("head")[0].appendChild(script);
-	} else {
-		initMyBookmarklet();
-	}
+    // check prior inclusion and version
+    if (window.jQuery === undefined || window.jQuery.fn.jquery < v) {
+        var done = false;
+        var script = document.createElement("script");
+        script.src = "https://ajax.googleapis.com/ajax/libs/jquery/" + v + "/jquery.min.js";
+        script.onload = script.onreadystatechange = function(){
+            if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
+                done = true;
+                initMyBookmarklet();
+            }
+        };
+        document.getElementsByTagName("head")[0].appendChild(script);
+    } else {
+        initMyBookmarklet();
+    }
 
     function findClosestIdAttrNode_brute(origNode) {
         if (origNode.id !== "") {
@@ -65,12 +65,12 @@
         return closestIdNode;
     }
 
-	function initMyBookmarklet() {
+    function initMyBookmarklet() {
         window.jQuery.fn.extend({reverse: Array.prototype.reverse});
         window.findClosestIdElement = findClosestIdElement_brute;
 
         console.log('initMyBookmarklet');
-		(window.myBookmarklet = function() {
+        (window.myBookmarklet = function() {
             // your JavaScript code goes here!
             $(document).click(function(event) {
                 // var text = $(event.target).text();
@@ -87,8 +87,8 @@
                 var closestElemUrl = document.location.toString();
                 console.log(closestElemUrl);
             });
-		})();
-	}
+        })();
+    }
 
 
     function getSelText() {
