@@ -32,14 +32,14 @@
         if (origElemId !== undefined) {
             return origElemId;
         }
-        var elementsBeforeForm = $(origElem).parents().addBack().prevAll();
-        var elem = (elementsBeforeForm
-            .find('[id]')
-            .add(elementsBeforeForm)
-            .reverse()
+        var nearestElem = (
+            $(origElem).parents().addBack()
+            .prevAll().addBack()
+            .add($(origElem).parent())
             .filter('[id]')
-            .first());
-        return elem;
+            .reverse()
+            .first();
+        return nearestElem;
     }
 
 	function initMyBookmarklet() {
