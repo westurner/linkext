@@ -1,6 +1,4 @@
 
-jQuery.fn.reverse = [].reverse;
-
 (function(){
 
     /* 
@@ -28,11 +26,13 @@ jQuery.fn.reverse = [].reverse;
 		initMyBookmarklet();
 	}
 
+    window.jQuery.fn.reverse = [].reverse;
+
     function findClosestIdElement(origElem) {
         /* http://stackoverflow.com/a/23937118/188833 */
         var elementsBeforeForm = $(origElem).parents().addBack().prevAll();
-        var elem = elementsBeforeForm.find('[id]').add(elementsBeforeForm).reverse().filter('[id]').first()
-        return elem
+        var elem = elementsBeforeForm.find('[id]').add(elementsBeforeForm).reverse().filter('[id]').first();
+        return elem;
     }
 
 	function initMyBookmarklet() {
