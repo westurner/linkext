@@ -67,7 +67,7 @@
 
     function initMyBookmarklet() {
         window.jQuery.fn.extend({reverse: Array.prototype.reverse});
-        window.findClosestIdElement = findClosestIdElement_brute;
+        window.findClosestIdAttrNode = findClosestIdAttrNode_brute;
 
         console.log('initMyBookmarklet');
         (window.myBookmarklet = function() {
@@ -79,7 +79,7 @@
                 console.log($(event.target));
                 console.log('event.target.id');
                 console.log($(event.target).attr('id'));
-                var closestElemWithId = window.findClosestIdElement(event.target);
+                var closestElemWithId = window.findClosestIdAttrNode(event.target);
                 console.log(closestElemWithId);
                 var closestElemId = closestElemWithId.id;
                 console.log(closestElemId);
