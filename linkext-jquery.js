@@ -28,6 +28,10 @@
 
     function findClosestIdElement(origElem) {
         /* http://stackoverflow.com/a/23937118/188833 */
+        var origElemId = $(origElem).attr('id');
+        if (origElemId !== undefined) {
+            return origElemId;
+        }
         var elementsBeforeForm = $(origElem).parents().addBack().prevAll();
         var elem = (elementsBeforeForm
             .find('[id]')
