@@ -38,7 +38,7 @@
             .add($(origElem).parent())
             .filter('[id]')
             .reverse()
-            .first();
+            .first());
         return nearestElem;
     }
 
