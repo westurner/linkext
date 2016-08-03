@@ -97,8 +97,8 @@
 
     module.exports = function(window) {
         return {
-        'getClosestIdAttrNode': getClosestIdAttrNode_brute,
-        'getClosestIdAttrNode_brute': getClosestIdAttrNode_brute,
+            'getClosestIdAttrNode': getClosestIdAttrNode_brute,
+            'getClosestIdAttrNode_brute': getClosestIdAttrNode_brute
         }
     }
 
