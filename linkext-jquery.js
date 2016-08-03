@@ -7,31 +7,38 @@
     * - http://www.codetoad.com/javascript_get_selected_text.html
     */
 
-    // the minimum version of jQuery we want
-    var v = "3.1.0";
+    function main() {
+        // the minimum version of jQuery we want
+        var v = "3.1.0";
 
-    // check prior inclusion and version
-    if (window.jQuery === undefined || window.jQuery.fn.jquery < v) {
-        var done = false;
-        var script = document.createElement("script");
-        script.src = "https://ajax.googleapis.com/ajax/libs/jquery/" + v + "/jquery.min.js";
-        script.onload = script.onreadystatechange = function(){
-            if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
-                done = true;
-                initMyBookmarklet();
-            }
-        };
-        document.getElementsByTagName("head")[0].appendChild(script);
-    } else {
-        initMyBookmarklet();
+        // check prior inclusion and version
+        if (window.jQuery === undefined || window.jQuery.fn.jquery < v) {
+            var done = false;
+            var script = document.createElement("script");
+            script.src = "https://ajax.googleapis.com/ajax/libs/jquery/" + v + "/jquery.min.js";
+            script.onload = script.onreadystatechange = function(){
+                if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
+                    done = true;
+                    initMyBookmarklet();
+                }
+            };
+            document.getElementsByTagName("head")[0].appendChild(script);
+        } else {
+            initMyBookmarklet();
+        }
     }
 
-    function findClosestIdAttrNode_brute(origNode) {
+    function getClosestIdAttrNode_brute(origNode) {
         if (origNode.id !== "") {
             return origNode;
         }
         var nodes = [];
-        var allNodes = document.all;
+        var allNodes;
+        if (document.all) {
+            allNodes = document.all;
+        } else {
+            allNodes = document.getElementsByTagName('*');
+        }
         for (var i=0; i < allNodes.length; i++) {
             node = allNodes[i];
             if (node.id !== "") {
@@ -46,28 +53,9 @@
         return closestIdNode;
     }
 
-    function findClosestIdAttrNode_sfd(origNode) {
-        /* TODO */
-        var closestIdNode = null;
-        function walkDOM_reverse(node) {
-            do {
-                if (node.hasChildNodes()) {
-                    walkDOM(node.lastChild())
-                }
-                console.log(node);
-                if (node.id !== "") {
-                    closestIdNode = node;
-                    break;
-                }
-            } while ((closestIdNode === null) && (node = node.previousSibling))
-        }
-        walkDOM_reverse(origNode);
-        return closestIdNode;
-    }
-
     function initMyBookmarklet() {
         window.jQuery.fn.extend({reverse: Array.prototype.reverse});
-        window.findClosestIdAttrNode = findClosestIdAttrNode_brute;
+        window.getClosestIdAttrNode = getClosestIdAttrNode_brute;
 
         console.log('initMyBookmarklet');
         (window.myBookmarklet = function() {
@@ -79,7 +67,7 @@
                 console.log($(event.target));
                 console.log('event.target.id');
                 console.log($(event.target).attr('id'));
-                var closestElemWithId = window.findClosestIdAttrNode(event.target);
+                var closestElemWithId = window.getClosestIdAttrNode(event.target);
                 console.log(closestElemWithId);
                 var closestElemId = closestElemWithId.id;
                 console.log(closestElemId);
@@ -103,5 +91,14 @@
         return SelText;
     }
 
-})();
+    module.exports = function(window) {
+        return {
+        'getClosestIdAttrNode': getClosestIdAttrNode_brute,
+        'getClosestIdAttrNode_brute': getClosestIdAttrNode_brute,
+        }
+    }
+
+    main();
+
+})(window);
 
