@@ -60,13 +60,14 @@
         console.log('initMyBookmarklet');
         (window.myBookmarklet = function() {
             // your JavaScript code goes here!
-            $(document).click(function(event) {
+            window.linkextEvent = function(event) {
                 // var text = $(event.target).text();
                 // var clickedElem = $(event.target);
                 console.log('event.target')
                 console.log($(event.target));
                 console.log('event.target.id');
                 console.log($(event.target).attr('id'));
+                $(event.target).fadeOut(50).fadeIn(50).fadeOut(50).fadeIn(50);
                 var closestElemWithId = window.getClosestIdAttrNode(event.target);
                 console.log(closestElemWithId);
                 var closestElemId = closestElemWithId.id;
@@ -74,8 +75,16 @@
                 document.location.hash = closestElemId;
                 var closestElemUrl = document.location.toString();
                 console.log(closestElemUrl);
-            });
-        })();
+                var selected_text = getSelText();
+                var text_and_link = selected_text + "\n-- " + closestElemUrl;
+                console.log(text_and_link);
+                window.linkextEvent = "";
+                $(closestElemWithId).fadeOut(50).fadeIn(50).fadeOut(50).fadeIn(50);
+                $(document).unbind("click", window.linkextEvent);
+            }
+            $(document).click(window.linkextEvent);
+        })
+        window.myBookmarklet();
     }
 
 
