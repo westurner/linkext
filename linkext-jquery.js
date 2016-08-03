@@ -91,6 +91,10 @@
         return SelText;
     }
 
+    if (module === undefined) {
+        module = {};
+    }
+
     module.exports = function(window) {
         return {
         'getClosestIdAttrNode': getClosestIdAttrNode_brute,
