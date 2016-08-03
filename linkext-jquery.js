@@ -100,14 +100,12 @@
         return SelText;
     }
 
-    if (module === undefined) {
-        module = {};
-    }
-
-    module.exports = function(window) {
-        return {
-            'getClosestIdAttrNode': getClosestIdAttrNode_brute,
-            'getClosestIdAttrNode_brute': getClosestIdAttrNode_brute
+    if (typeof module !== 'undefined') {
+        module.exports = function(window) {
+            return {
+                'getClosestIdAttrNode': getClosestIdAttrNode_brute,
+                'getClosestIdAttrNode_brute': getClosestIdAttrNode_brute
+            }
         }
     }
 
